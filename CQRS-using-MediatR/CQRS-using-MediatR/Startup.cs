@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MediatR;
 using CQRS_using_MediatR.DAL.Repository;
-using CQRS_using_MediatR.Common.Infrastructure.Mapper;
+using CQRS_using_MediatR.Infrastructure.Mapper;
 
 namespace CQRS_using_MediatR
 {
@@ -31,7 +31,7 @@ namespace CQRS_using_MediatR
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "CQRSTest", Version = "v1" });
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "CryptoTrade Backend API", Version = "v1" });
             });
             services.AddSingleton<IUserRepository, UserRepository>();
             services.AddMediatR(Assembly.GetExecutingAssembly());
@@ -42,13 +42,16 @@ namespace CQRS_using_MediatR
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             // Enable middleware to serve generated Swagger as a JSON endpoint.
-            app.UseSwagger();
+            app.UseSwagger(c =>
+            {
+                c.SerializeAsV2 = true;
+            });
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
             // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("v1/swagger.json", "CQRS Todo");
+                c.SwaggerEndpoint("v1/swagger.json", "CryptoTrade Backend API");
             });
 
             app.UseHttpsRedirection();
@@ -57,7 +60,7 @@ namespace CQRS_using_MediatR
 
             app.UseCors();
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

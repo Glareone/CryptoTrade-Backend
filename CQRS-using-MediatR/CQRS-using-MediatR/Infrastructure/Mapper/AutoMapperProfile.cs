@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using CQRS_using_MediatR.Features.User.Dtos;
 
-namespace CQRS_using_MediatR.Common.Infrastructure.Mapper
+namespace CQRS_using_MediatR.Infrastructure.Mapper
 {
     class AutoMapperProfile: Profile
     {
