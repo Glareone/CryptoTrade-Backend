@@ -43,6 +43,15 @@ namespace CQRS_using_MediatR
             services.AddScoped<IBtcBrokerClient, BtcBrokerClient>();
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddAutoMapper(cfg => cfg.AddProfile<AutoMapperProfile>());
+
+            services.AddCors(options => options.AddPolicy("AllowAll",
+                builder =>
+                {
+                    builder
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
