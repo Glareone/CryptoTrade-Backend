@@ -24,7 +24,7 @@ namespace CQRS_using_MediatR.Features.HistoricalData
         public async Task<ResponseTemplate<HistoricalDataDto>> Handle(GetHistoricalDataRequestQuery request, CancellationToken cancellationToken)
         {
             var historicalData = await _brokerService.GetHistoricalData(request.AggregationInterval);
-            _logger.LogInformation("BTC Broker Data gathered successfully");
+            _logger.LogInformation("[GetHistoricalDataRequestHandler] Handler executed successfully");
 
             return new ResponseTemplate<HistoricalDataDto>(historicalData);
         }

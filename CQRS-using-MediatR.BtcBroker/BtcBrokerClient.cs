@@ -12,8 +12,8 @@ namespace CQRS_using_MediatR.BtcBroker
 {
     public class BtcBrokerClient : IBtcBrokerClient
     {
-        private string _address;
-        private ILogger<BtcBrokerClient> _logger;
+        private readonly string _address;
+        private readonly ILogger<BtcBrokerClient> _logger;
 
         public BtcBrokerClient(ILogger<BtcBrokerClient> logger)
         {
