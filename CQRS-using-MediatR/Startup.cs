@@ -5,7 +5,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MediatR;
 using CQRS_using_MediatR.DAL.Repository;
+using CQRS_using_MediatR.Infrastructure.BrokerClients;
+using CQRS_using_MediatR.Infrastructure.BrokerClients.BtcBrokerClient;
 using CQRS_using_MediatR.Infrastructure.Mapper;
+using CQRS_using_MediatR.Infrastructure.Services;
 
 namespace CQRS_using_MediatR
 {
@@ -34,6 +37,8 @@ namespace CQRS_using_MediatR
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "CryptoTrade Backend API", Version = "v1" });
             });
             services.AddSingleton<IUserRepository, UserRepository>();
+            services.AddScoped<IBrokerService, BrokerService>();
+            services.AddScoped<IBtcBrokerClient, BtcBrokerClient>();
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddAutoMapper(cfg => cfg.AddProfile<AutoMapperProfile>());
         }
