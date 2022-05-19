@@ -6,19 +6,22 @@ using CQRS_using_MediatR.Common.Infrastructure.BrokerClients;
 using Grpc.Core;
 using Grpc.Net.Client;
 using GrpcClient;
+using Microsoft.Extensions.Logging;
 
 namespace CQRS_using_MediatR.BtcBroker
 {
     public class BtcBrokerClient : IBtcBrokerClient
     {
         private string _address;
+        private ILogger<BtcBrokerClient> _logger;
 
-        public BtcBrokerClient()
+        public BtcBrokerClient(ILogger<BtcBrokerClient> logger)
         {
             _address = "https://localhost:5002";
+            _logger = logger;
         }
 
-        public async Task<IList<HistoricalData>> GetDataAsync()
+        public async Task<IEnumerable<HistoricalData>> GetDataAsync()
         {
             using var channel = GrpcChannel.ForAddress(_address);
              var client = new HistoricalFeed.HistoricalFeedClient(channel);
@@ -45,10 +48,12 @@ namespace CQRS_using_MediatR.BtcBroker
                         WeightedPrice = reply.WeightedPrice
                     });
                 }
+
+                _logger.LogInformation("[Broker] Historical data gathered successfully");
              }
              catch (RpcException ex) when (ex.StatusCode == StatusCode.Cancelled)
              {
-                 Console.WriteLine("Stream cancelled.");
+                 _logger.LogError("[Broker] Exception raised: [{1}]", ex);
              }
             
              return grpcServerResponse;

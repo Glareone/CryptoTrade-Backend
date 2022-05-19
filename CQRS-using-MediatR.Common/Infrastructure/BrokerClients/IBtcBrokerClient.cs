@@ -5,6 +5,6 @@ namespace CQRS_using_MediatR.Common.Infrastructure.BrokerClients
 {
     public interface IBtcBrokerClient
     {
-        Task<IList<HistoricalData>> GetDataAsync();
+        Task<IEnumerable<HistoricalData>> GetDataAsync();
     }
 }
