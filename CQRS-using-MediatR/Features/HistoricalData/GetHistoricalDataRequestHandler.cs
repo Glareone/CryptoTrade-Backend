@@ -12,18 +12,17 @@ namespace CQRS_using_MediatR.Features.HistoricalData
     public class GetHistoricalDataRequestHandler : IRequestHandler<GetHistoricalDataRequestQuery, ResponseTemplate<HistoricalDataDto>>
     {
         private IBrokerService _brokerService;
-        private IMapper _mapper;
 
-        public GetHistoricalDataRequestHandler(IBrokerService brokerService, IMapper mapper)
+        public GetHistoricalDataRequestHandler(IBrokerService brokerService)
         {
             _brokerService = brokerService;
-            _mapper = mapper;
         }
 
-        public Task<ResponseTemplate<HistoricalDataDto>> Handle(GetHistoricalDataRequestQuery request, CancellationToken cancellationToken)
+        public async Task<ResponseTemplate<HistoricalDataDto>> Handle(GetHistoricalDataRequestQuery request, CancellationToken cancellationToken)
         {
-            var historicalData = _brokerService.GetHistoricalData(request.AggregationInterval);
-            throw new NotImplementedException();
+            var historicalData = await _brokerService.GetHistoricalData(request.AggregationInterval);
+
+            return new ResponseTemplate<HistoricalDataDto>(historicalData);
         }
     }
 }

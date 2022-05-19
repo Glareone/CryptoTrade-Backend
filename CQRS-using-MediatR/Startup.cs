@@ -1,12 +1,12 @@
 ﻿using System.Reflection;
+using CQRS_using_MediatR.BtcBroker;
+using CQRS_using_MediatR.Common.Infrastructure.BrokerClients;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MediatR;
 using CQRS_using_MediatR.DAL.Repository;
-using CQRS_using_MediatR.Infrastructure.BrokerClients;
-using CQRS_using_MediatR.Infrastructure.BrokerClients.BtcBrokerClient;
 using CQRS_using_MediatR.Infrastructure.Mapper;
 using CQRS_using_MediatR.Infrastructure.Services;
 

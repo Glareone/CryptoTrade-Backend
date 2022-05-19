@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CQRS-using-MediatR.BtcBroker\CQRS-using-MediatR.BtcBroker.csproj" />
     <ProjectReference Include="..\CQRS-using-MediatR.Common\CQRS-using-MediatR.Common.csproj" />
     <ProjectReference Include="..\CQRS-using-MediatR.DAL\CQRS-using-MediatR.DAL.csproj" />
   </ItemGroup>
