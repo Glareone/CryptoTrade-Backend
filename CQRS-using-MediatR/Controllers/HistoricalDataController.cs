@@ -19,9 +19,9 @@ namespace CQRS_using_MediatR.Controllers
 
         [HttpGet]
         [EnableCors("AllowAll")]
-        public async Task<IActionResult> GetHistoricalData()
+        public async Task<IActionResult> GetHistoricalData([FromQuery] AggregationInterval aggregationInterval)
         {
-            var response = await _mediator.Send(new GetHistoricalDataRequestQuery { AggregationInterval = AggregationInterval.FifteenMinutes });
+            var response = await _mediator.Send(new GetHistoricalDataRequestQuery { AggregationInterval = aggregationInterval });
             return Ok(response);
         }
     }

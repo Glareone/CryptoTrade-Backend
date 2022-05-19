@@ -4,14 +4,20 @@ using System.Threading.Tasks;
 using CQRS_using_MediatR.Common.Infrastructure.BrokerClients;
 using CQRS_using_MediatR.Features.HistoricalData.Dtos;
 using CQRS_using_MediatR.Infrastructure.Common.Types;
+using Microsoft.Extensions.Logging;
 
 namespace CQRS_using_MediatR.Infrastructure.Services
 {
     public class BrokerService: IBrokerService
     {
         private readonly IBtcBrokerClient _btcBrokerClient;
+        private readonly ILogger<BrokerService> _logger;
             
-        public BrokerService(IBtcBrokerClient btcBrokerClient) => _btcBrokerClient = btcBrokerClient;
+        public BrokerService(IBtcBrokerClient btcBrokerClient, ILogger<BrokerService> logger)
+        {
+            _btcBrokerClient = btcBrokerClient;
+            _logger = logger;
+        }
 
         public async Task<HistoricalDataDto> GetHistoricalData(AggregationInterval interval)
         {
@@ -45,6 +51,8 @@ namespace CQRS_using_MediatR.Infrastructure.Services
                 DailyHigh = intervalHigh.High,
                 DailyLow = intervalLow.Low
             };
+
+            _logger.LogInformation("[Broker Service] Result was aggregated successfully");
 
             return result;
         }

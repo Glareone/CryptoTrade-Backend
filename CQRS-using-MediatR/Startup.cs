@@ -32,6 +32,8 @@ namespace CQRS_using_MediatR
                     options.JsonSerializerOptions.PropertyNamingPolicy = null;
                 });
 
+            services.AddApplicationInsightsTelemetry();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "CryptoTrade Backend API", Version = "v1" });

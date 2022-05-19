@@ -1,5 +1,7 @@
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.ApplicationInsights;
 
 namespace CQRS_using_MediatR
 {
@@ -15,6 +17,10 @@ namespace CQRS_using_MediatR
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                })
+                .ConfigureLogging(logging => {
+                    logging.AddApplicationInsights("InstrumentationKey=5bb1f357-9480-409b-bf6c-06278149f7b9;IngestionEndpoint=https://eastus-8.in.applicationinsights.azure.com/;LiveEndpoint=https://eastus.livediagnostics.monitor.azure.com/");
+                    logging.AddFilter<ApplicationInsightsLoggerProvider>("", LogLevel.Information);
                 });
     }
 }
