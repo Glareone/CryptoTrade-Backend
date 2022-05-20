@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CQRS_using_MediatR.Features.HistoricalData.Dtos
+﻿namespace CQRS_using_MediatR.Features.HistoricalData.Dtos
 {
     public class HistoricalDataDto
     {

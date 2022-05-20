@@ -7,13 +7,14 @@ Should support next things:
 &#9744; Provide protected access for others.  
 &#9744; Integration with Authentication Provider (Most likely will be Okta)  
 &#9744; Integration with Authorization Provider  
-&#9745; BTC BrokerClient Integrated  
+&#9745; BTC Broker Client Integrated  
 &#9745; Data Aggregation  
 &#9745; AppInsights Integrated  
-&#9745; Supports CQRS    
+&#9745; Supports CQRS  
 &#9745; Supports Mapping  
-&#9744; Entity Framework   
-&#9744; Device Detection   
+&#9744; Entity Framework  
+&#9744; Device Detection  
+&#9745; Error Handling  
 
 ## CQRS
 We are going to use CQRS to split sources for reading.
