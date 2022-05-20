@@ -9,7 +9,9 @@ Should support next things:
 &#9744; Integration with Authorization Provider   
 &#9745; Supports CQRS  
 &#9745; Supports Mapping  
-&#9744; Entity Framework   
+&#9744; Entity Framework  
+&#9745; Error Handling  
+&#9745; BTC Broker Client Integrated     
 
 ## CQRS
 We are going to use CQRS to split sources for reading.
