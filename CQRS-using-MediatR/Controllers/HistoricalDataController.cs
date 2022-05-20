@@ -1,7 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using CQRS_using_MediatR.Common.Infrastructure.ErrorHandlers;
 using CQRS_using_MediatR.Features.HistoricalData;
+using CQRS_using_MediatR.Features.HistoricalData.Dtos;
 using CQRS_using_MediatR.Infrastructure.Common.Types;
 using Microsoft.AspNetCore.Cors;
 
@@ -19,9 +21,14 @@ namespace CQRS_using_MediatR.Controllers
 
         [HttpGet]
         [EnableCors("AllowAll")]
-        public async Task<IActionResult> GetHistoricalData([FromQuery] AggregationInterval aggregationInterval)
+        public async Task<IActionResult> GetHistoricalData([FromQuery] AggregationInterval? aggregationInterval)
         {
-            var response = await _mediator.Send(new GetHistoricalDataRequestQuery { AggregationInterval = aggregationInterval });
+            if (!aggregationInterval.HasValue)
+            {
+                return Ok(ErrorHandlingUtils.GetResponseTemplate<HistoricalDataDto>(ErrorCode.Input));
+            }
+
+            var response = await _mediator.Send(new GetHistoricalDataRequestQuery { AggregationInterval = aggregationInterval.Value });
             return Ok(response);
         }
     }

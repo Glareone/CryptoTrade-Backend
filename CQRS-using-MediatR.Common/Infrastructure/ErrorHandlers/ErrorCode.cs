@@ -4,6 +4,7 @@
     {
         Unknown = 0,
         Permissions,
-        Input
+        Input,
+        InternalError
     }
 }

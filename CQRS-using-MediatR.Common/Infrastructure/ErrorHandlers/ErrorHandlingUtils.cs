@@ -20,11 +20,12 @@ namespace CQRS_using_MediatR.Common.Infrastructure.ErrorHandlers
             return UserFriendlyErrorCodeMessage[ErrorCode.Unknown];
         }
 
-        private static readonly Dictionary<ErrorCode, string> UserFriendlyErrorCodeMessage = new Dictionary<ErrorCode, string>
+        private static readonly Dictionary<ErrorCode, string> UserFriendlyErrorCodeMessage = new()
         {
             { ErrorCode.Unknown, "Something went wrong. Please contact Administrator." },
             { ErrorCode.Input, "Your input was wrong. Please check inserted values." },
-            { ErrorCode.Permissions, "You are not authorized to perform this action." }
+            { ErrorCode.Permissions, "You are not authorized to perform this action." },
+            { ErrorCode.InternalError, "Internal Server Error. Underlined method throws an error" }
         };
     }
 }
